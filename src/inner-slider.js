@@ -315,6 +315,7 @@ export class InnerSlider extends React.Component {
 
     const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
+    const currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
     // pause slider if autoplay is set to false
     if(props.autoplay) {
@@ -330,6 +331,7 @@ export class InnerSlider extends React.Component {
       trackWidth,
       slideHeight,
       listHeight,
+      currentSlide,
     }, function () {
 
       var targetLeft = getTrackLeft(assign({
