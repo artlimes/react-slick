@@ -798,6 +798,7 @@ export class InnerSlider extends React.Component {
 
     if (this.props.swipeToSlide) {
       let swipedSlide;
+      let slidesTraversed;
 
       const slickList = ReactDOM.findDOMNode(this.list);
 
@@ -819,7 +820,11 @@ export class InnerSlider extends React.Component {
         return true;
       });
 
-      const slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
+      if(swipedSlide && swipedSlide.dataset) {
+        slidesTraversed = Math.abs(swipedSlide.dataset.index - this.state.currentSlide) || 1;
+      } else {
+        slidesTraversed = 0;
+      }
 
       return slidesTraversed;
     } else {
