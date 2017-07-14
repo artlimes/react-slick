@@ -466,9 +466,10 @@ export class InnerSlider extends React.Component {
       var loaded = true;
       var slidesToLoad = [];
       for (var i = targetSlide; i < targetSlide + this.props.slidesToShow; i++ ) {
-        loaded = loaded && (this.state.lazyLoadedList.indexOf(i) >= 0);
+        var slideToLoad = i < 0 ? this.props.slideCount - i : i;
+        loaded = loaded && (this.state.lazyLoadedList.indexOf(slideToLoad) >= 0);
         if (!loaded) {
-          slidesToLoad.push(i);
+          slidesToLoad.push(slideToLoad);
         }
       }
       if (!loaded) {
