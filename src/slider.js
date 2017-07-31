@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import React from 'react';
 import {InnerSlider} from './inner-slider';
 import assign from 'object-assign';
@@ -57,7 +58,16 @@ export default class Slider extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-   return this.state.breakpoint !== nextState.breakpoint || this.props.slickGoTo !== nextProps.slickGoTo;
+    // check standard props
+    if (this.state.breakpoint !== nextState.breakpoint ||
+        this.props.slickGoTo !== nextProps.slickGoTo) {
+      return true;
+    }
+
+    // now check for children
+    return (
+      _.isEqual(nextProps.children, this.props.children)
+    );
   }
 
   slickPrev() {

@@ -67,10 +67,11 @@
   "dependencies": {
     "can-use-dom": "^0.1.0",
     "classnames": "^2.2.5",
+    "enquire.js": "^2.1.6",
     "json2mq": "^0.2.0",
+    "lodash": "^4.17.4",
     "object-assign": "^4.1.0",
-    "slick-carousel": "^1.6.0",
-    "enquire.js": "^2.1.6"
+    "slick-carousel": "^1.6.0"
   },
   "peerDependencies": {
     "react": "^0.14.0 || ^15.0.1",
