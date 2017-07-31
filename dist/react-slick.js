@@ -561,8 +561,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth;
 
 	    if (!props.vertical) {
-	      var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
-	      slideWidth = (_this2.getWidth(_reactDom2.default.findDOMNode(_this2)) - centerPaddingAdj) / props.slidesToShow;
+	      if (props.variableWidth === true) {
+	        slideWidth = _this2.getWidth(slickList.querySelector('[data-index="0"]'));
+	      } else {
+	        var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
+	        slideWidth = (_this2.getWidth(_reactDom2.default.findDOMNode(_this2)) - centerPaddingAdj) / props.slidesToShow;
+	      }
 	    } else {
 	      slideWidth = _this2.getWidth(_reactDom2.default.findDOMNode(_this2));
 	    }
@@ -605,8 +609,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideWidth;
 
 	    if (!props.vertical) {
-	      var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
-	      slideWidth = (_this2.getWidth(_reactDom2.default.findDOMNode(_this2)) - centerPaddingAdj) / props.slidesToShow;
+	      if (props.variableWidth === true) {
+	        slideWidth = _this2.getWidth(slickList.querySelector('[data-index="0"]'));
+	      } else {
+	        var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
+	        slideWidth = (_this2.getWidth(_reactDom2.default.findDOMNode(_this2)) - centerPaddingAdj) / props.slidesToShow;
+	      }
 	    } else {
 	      slideWidth = _this2.getWidth(_reactDom2.default.findDOMNode(_this2));
 	    }
@@ -644,8 +652,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  this.getWidth = function (elem) {
-	    var scaleX = elem.getBoundingClientRect().width / (elem.offsetWidth || 1) || 1;
-	    return 1 / scaleX * (elem.getBoundingClientRect().width || elem.offsetWidth || 0);
+	    return elem.getBoundingClientRect().width || elem.offsetWidth || 0;
 	  };
 
 	  this.getHeight = function (elem) {

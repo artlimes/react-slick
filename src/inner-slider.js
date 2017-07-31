@@ -263,8 +263,12 @@ export class InnerSlider extends React.Component {
     var slideWidth;
 
     if (!props.vertical) {
-      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      if (props.variableWidth === true) {
+        slideWidth = this.getWidth(slickList.querySelector('[data-index="0"]'));
+      } else {
+        var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
+        slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      }
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
@@ -307,8 +311,12 @@ export class InnerSlider extends React.Component {
     var slideWidth;
 
     if (!props.vertical) {
-      var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
-      slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      if (props.variableWidth === true) {
+        slideWidth = this.getWidth(slickList.querySelector('[data-index="0"]'));
+      } else {
+        var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
+        slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
+      }
     } else {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
@@ -346,10 +354,7 @@ export class InnerSlider extends React.Component {
   };
 
   getWidth = (elem) => {
-    var scaleX = (elem.getBoundingClientRect().width / (elem.offsetWidth || 1)) || 1;
-    return (
-     1 / scaleX * (elem.getBoundingClientRect().width || elem.offsetWidth || 0)
-    );
+    return elem.getBoundingClientRect().width || elem.offsetWidth || 0;
   };
 
   getHeight = (elem) => {
