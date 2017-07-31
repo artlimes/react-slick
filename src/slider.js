@@ -66,7 +66,7 @@ export default class Slider extends React.Component {
 
     // now check for children
     return (
-      _.isEqual(nextProps.children, this.props.children)
+      !_.isEqual(nextProps.children, this.props.children)
     );
   }
 

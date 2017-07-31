@@ -174,7 +174,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    }
 
 	    // now check for children
-	    return _lodash2.default.isEqual(nextProps.children, this.props.children);
+	    return !_lodash2.default.isEqual(nextProps.children, this.props.children);
 	  };
 
 	  Slider.prototype.slickPrev = function slickPrev() {
