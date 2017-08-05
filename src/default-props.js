@@ -29,6 +29,7 @@ var defaultProps = {
     slide: 'div',
     slidesToShow: 1,
     slidesToScroll: 1,
+    slideHeight: false,
     speed: 500,
     swipe: true,
     swipeToSlide: false,

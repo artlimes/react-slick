@@ -39,9 +39,14 @@ var getSlideStyle = function (spec) {
     style.width = spec.slideWidth;
   }
 
+  if (spec.slideHeight) {
+    style.height = spec.slideHeight;
+  }
+
   if (spec.fade) {
     style.position = 'relative';
     style.left = -spec.index * spec.slideWidth;
+    style.height = spec.slideHeight;
     style.opacity = (spec.currentSlide === spec.index) ? 1 : 0;
     style.transition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase;
     style.WebkitTransition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase;

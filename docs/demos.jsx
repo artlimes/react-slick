@@ -32,18 +32,18 @@ export default class App extends React.Component {
   render() {
     return (
       <div className='content'>
-        <SimpleSlider />
+        {/*<SimpleSlider />
         <MultipleItems />
         <Responsive />
         <UnevenSetsInfinite />
-        <UnevenSetsFinite />
+        <UnevenSetsFinite />*/}
         <CenterMode />
-        <FocusOnSelect />
+        {/*<FocusOnSelect />
         <AutoPlay />
         <PauseOnHover />
-        <Rtl />
+        <Rtl />*/}
         <VariableWidth />
-        <AdaptiveHeight />
+        {/*<AdaptiveHeight />
         <LazyLoad />
         <Fade />
         <SlideChangeHooks />
@@ -55,7 +55,7 @@ export default class App extends React.Component {
         <DynamicSlides />
         <VerticalMode />
         <SwipeToSlide />
-        <VerticalSwipeToSlide />
+        <VerticalSwipeToSlide />*/}
 
       </div>
     );

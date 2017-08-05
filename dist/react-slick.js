@@ -17512,6 +17512,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      lazyLoadedList: this.state.lazyLoadedList,
 	      rtl: this.props.rtl,
 	      slideWidth: this.state.slideWidth,
+	      slideHeight: this.state.slideHeight,
 	      slidesToShow: this.props.slidesToShow,
 	      slidesToScroll: this.props.slidesToScroll,
 	      slideCount: this.state.slideCount,
@@ -17675,11 +17676,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideCount = _react2.default.Children.count(props.children);
 	    var listWidth = _this2.getWidth(slickList);
 	    var trackWidth = _this2.getWidth(_reactDom2.default.findDOMNode(_this2.track));
-	    var slideWidth;
+	    var slideWidth, slidesWidth;
 
 	    if (!props.vertical) {
 	      if (props.variableWidth === true) {
-	        slideWidth = _this2.getWidth(slickList.querySelector('[data-index="0"]'));
+	        slideWidth = 0;
+	        slidesWidth = 0;
+	        // get width from all children slides
+	        var children = slickList.querySelectorAll('[data-index]');
+	        children.forEach(function (slide) {
+	          slidesWidth += _this2.getWidth(slide);
+	        });
 	      } else {
 	        var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
 	        slideWidth = (_this2.getWidth(_reactDom2.default.findDOMNode(_this2)) - centerPaddingAdj) / props.slidesToShow;
@@ -17688,7 +17695,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideWidth = _this2.getWidth(_reactDom2.default.findDOMNode(_this2));
 	    }
 
-	    var slideHeight = _this2.getHeight(slickList.querySelector('[data-index="0"]'));
+	    var slideHeight = props.slideHeight ? props.slideHeight * slideWidth : _this2.getHeight(slickList.querySelector('[data-index="0"]'));
 	    var listHeight = slideHeight * props.slidesToShow;
 
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -17696,10 +17703,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this2.setState({
 	      slideCount: slideCount,
 	      slideWidth: slideWidth,
+	      slidesWidth: slidesWidth,
+	      slideHeight: slideHeight,
 	      listWidth: listWidth,
 	      trackWidth: trackWidth,
 	      currentSlide: currentSlide,
-	      slideHeight: slideHeight,
 	      listHeight: listHeight
 	    }, function () {
 
@@ -17736,7 +17744,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	      slideWidth = _this2.getWidth(_reactDom2.default.findDOMNode(_this2));
 	    }
 
-	    var slideHeight = _this2.getHeight(slickList.querySelector('[data-index="0"]'));
+	    var slideHeight = props.slideHeight ? props.slideHeight * slideWidth : _this2.getHeight(slickList.querySelector('[data-index="0"]'));
+
 	    var listHeight = slideHeight * props.slidesToShow;
 	    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
@@ -18444,6 +18453,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    slide: 'div',
 	    slidesToShow: 1,
 	    slidesToScroll: 1,
+	    slideHeight: false,
 	    speed: 500,
 	    swipe: true,
 	    swipeToSlide: false,
@@ -18675,9 +18685,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  if (!spec.vertical) {
 	    if (spec.variableWidth) {
-	      trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
-	    } else if (spec.centerMode) {
-	      trackWidth = (spec.slideCount + 2 * (spec.slidesToShow + 1)) * spec.slideWidth;
+	      trackWidth = spec.slidesWidth;
 	    } else {
 	      trackWidth = (spec.slideCount + 2 * spec.slidesToShow) * spec.slideWidth;
 	    }
@@ -18866,9 +18874,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    style.width = spec.slideWidth;
 	  }
 
+	  if (spec.slideHeight) {
+	    style.height = spec.slideHeight;
+	  }
+
 	  if (spec.fade) {
 	    style.position = 'relative';
 	    style.left = -spec.index * spec.slideWidth;
+	    style.height = spec.slideHeight;
 	    style.opacity = spec.currentSlide === spec.index ? 1 : 0;
 	    style.transition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase;
 	    style.WebkitTransition = 'opacity ' + spec.speed + 'ms ' + spec.cssEase;

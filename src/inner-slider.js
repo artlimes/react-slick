@@ -155,6 +155,7 @@ export class InnerSlider extends React.Component {
       lazyLoadedList: this.state.lazyLoadedList,
       rtl: this.props.rtl,
       slideWidth: this.state.slideWidth,
+      slideHeight: this.state.slideHeight,
       slidesToShow: this.props.slidesToShow,
       slidesToScroll: this.props.slidesToScroll,
       slideCount: this.state.slideCount,
@@ -260,11 +261,17 @@ export class InnerSlider extends React.Component {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(slickList);
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
-    var slideWidth;
+    var slideWidth, slidesWidth;
 
     if (!props.vertical) {
       if (props.variableWidth === true) {
-        slideWidth = this.getWidth(slickList.querySelector('[data-index="0"]'));
+        slideWidth = 0;
+        slidesWidth = 0;
+        // get width from all children slides
+        const children = slickList.querySelectorAll('[data-index]');
+        children.forEach((slide) => {
+          slidesWidth += this.getWidth(slide);
+        });
       } else {
         var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
         slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
@@ -273,7 +280,8 @@ export class InnerSlider extends React.Component {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slideHeight = props.slideHeight ? props.slideHeight * slideWidth
+                                          : this.getHeight(slickList.querySelector('[data-index="0"]'));
     const listHeight = slideHeight * props.slidesToShow;
 
     var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
@@ -281,10 +289,11 @@ export class InnerSlider extends React.Component {
     this.setState({
       slideCount,
       slideWidth,
+      slidesWidth,
+      slideHeight,
       listWidth,
       trackWidth,
       currentSlide,
-      slideHeight,
       listHeight,
     }, function () {
 
@@ -321,7 +330,9 @@ export class InnerSlider extends React.Component {
       slideWidth = this.getWidth(ReactDOM.findDOMNode(this));
     }
 
-    const slideHeight = this.getHeight(slickList.querySelector('[data-index="0"]'));
+    const slideHeight = props.slideHeight ? props.slideHeight * slideWidth
+                                          : this.getHeight(slickList.querySelector('[data-index="0"]'));
+
     const listHeight = slideHeight * props.slidesToShow;
     const currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
