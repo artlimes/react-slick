@@ -18875,7 +18875,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  }
 
 	  if (spec.slideHeight) {
-	    style.height = spec.slideHeight;
+	    // min height allows for flexible height overrides
+	    style.minHeight = spec.slideHeight;
 	  }
 
 	  if (spec.fade) {
