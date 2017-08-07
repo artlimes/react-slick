@@ -1,16 +1,20 @@
-# react-slick
+# react-slick 
 
-[![Join the chat at https://gitter.im/akiran/react-slick](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/akiran/react-slick?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+This is a React ES6 Babel2 port of [React Slick 0.14.11](https://www.npmjs.com/package/react-slick)
 
 Carousel component built with React. It is a react port of [slick carousel](http://kenwheeler.github.io/slick/)
 
+This module is now under active maintenance and you can file bugs and PRs with us.
 
+From the original React Slick we have a number of things fixed and are now converting the lot into ES6 as we go along.
+
+We have also added more documentation below.
 
 ### Installation
 
 ```bash
-npm install react-slick
+npm install react-slick-one
 ```
 
 Also install slick-carousel for css and font
@@ -28,18 +32,7 @@ or add cdn link in your html
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css" />
 ```
 
-### [Demos](http://neostack.com/opensource/react-slick)
-
-### [PlayGround](https://jsfiddle.net/kirana/20bumb4g/)
-Use [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) to try react-slick with different settings.
-
-### Filing issues
-Please replicate your issue with [jsfiddle template](https://jsfiddle.net/kirana/20bumb4g/) and post it along with issue to make it easy for me to debug.
-
-
-### Starter Kit
-Checkout [yeoman generator](https://github.com/akiran/generator-react-slick) to quickly
-get started with react-slick.
+### [Demos](https://artlimes.com/find-art)
 
 ### Example
 
@@ -81,7 +74,7 @@ class SimpleSlider extends React.Component {
 | autoplay       | bool | Should the scroller auto scroll? | Yes |
 | autoplaySpeed  |  int | delay between each auto scoll. in ms | Yes |
 | centerMode     | bool | Should we centre to a single item? | Yes |
-| centerPadding  | | | |
+| centerPadding  | String | The right/left padding for the center element | Yes |
 | cssEase        | | | |
 | customPaging   | func | Custom paging templates. [Example](https://github.com/akiran/react-slick/blob/master/examples/CustomPaging.js)| Yes |
 | dots           | bool | Should we show the dots at the bottom of the gallery | Yes |
@@ -91,12 +84,13 @@ class SimpleSlider extends React.Component {
 | fade           | bool | Slides use fade for transition  | Yes |
 | focusOnSelect  | bool | Go to slide on click | Yes |
 | infinite       | bool | should the gallery wrap around it's contents | Yes |
-| initialSlide   | int | which item should be the first to be displayed | Yes |
+| initialSlide   | int | Selected Slide index starting from 0 | Yes |
 | lazyLoad       | bool | Loads images or renders components on demands | Yes |
 | pauseOnHover   | bool | prevents autoplay while hovering | Yes |
 | responsive     | array | Array of objects in the form of `{ breakpoint: int, settings: { ... } }` The breakpoint _int_ is the `maxWidth` so the settings will be applied when resolution is below this value. Breakpoints in the array should be ordered from smalles to greatest. Use 'unslick' in place of the settings object to disable rendering the carousel at that breakpoint. Example: `[ { breakpoint: 768, settings: { slidesToShow: 3 } }, { breakpoint: 1024, settings: { slidesToShow: 5 } }, { breakpoint: 100000, settings: 'unslick' } ]`| Yes |
 | rtl            | bool | Reverses the slide order | Yes |
-| slide         | string |||
+| slide          | string |||
+| slideHeight :new: | Float | A 0 to 1 based percentage to keep a relative height for each based on the width of the slide | Yes |
 | slidesToShow | int | Number of slides to be visible at a time | Yes |
 | slidesToScroll | int | Number of slides to scroll for each navigation item
 | speed | int |||
@@ -104,7 +98,7 @@ class SimpleSlider extends React.Component {
 | swipeToSlide | bool | Allow users to drag or swipe directly to a slide irrespective of slidesToScroll | Yes |
 | touchMove | bool |||
 | touchThreshold | int |||
-| variableWidth | bool |||
+| variableWidth | bool | Width is set by CSS or directly on the element. All slides must be same width for this to work | Yes |
 | useCSS | bool | Enable/Disable CSS Transitions | Yes |
 | vertical | bool | Vertical slide mode | Yes |
 | afterChange | function | callback function called after the current index changes | Yes |
@@ -173,7 +167,7 @@ and add below jest config in package.json
 Want to run demos locally
 
 ```bash
-git clone https://github.com/akiran/react-slick
+git clone https://github.com/artlimes/react-slick-one
 npm install
 npm start
 open http://localhost:8080

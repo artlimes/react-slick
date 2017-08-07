@@ -1,7 +1,7 @@
 {
-  "name": "react-slick",
-  "version": "0.14.11",
-  "description": " React port of slick carousel",
+  "name": "react-slick-one",
+  "version": "1.0.0",
+  "description": "React ES6 Babel2 port of React Slick 0.14.11",
   "main": "./lib",
   "scripts": {
     "start": "gulp server",
@@ -10,11 +10,11 @@
     "dev-test": "jest --watch",
     "lint": "eslint src"
   },
-  "author": "Kiran Abburi",
+  "author": "Artlimes",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/artlimes/react-slick"
+    "url": "https://github.com/artlimes/react-slick-one"
   },
   "keywords": [
     "slick",
@@ -92,7 +92,7 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/artlimes/react-slick/issues"
+    "url": "https://github.com/artlimes/react-slick-one/issues"
   },
-  "homepage": "https://github.com/artlimes/react-slick"
+  "homepage": "https://github.com/artlimes/react-slick-one"
 }

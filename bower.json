@@ -1,10 +1,10 @@
 {
-  "name": "react-slick",
+  "name": "react-slick-one",
   "main": "dist/react-slick.min.js",
-  "version": "0.14.2",
-  "homepage": "https://github.com/akiran/react-slick",
+  "version": "1.0.0",
+  "homepage": "https://github.com/artlimes/react-slick-one",
   "authors": [
-    "Kiran Abburi"
+    "Artlimes"
   ],
   "license": "MIT",
   "ignore": [
