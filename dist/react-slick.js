@@ -17680,7 +17680,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	    if (!props.vertical) {
 	      if (props.variableWidth === true) {
-	        slideWidth = 0;
+	        slideWidth = _this2.getWidth(slickList.querySelector('[data-index="0"]'));
 	        slidesWidth = 0;
 	        // get width from all children slides
 	        var children = slickList.querySelectorAll('[data-index]');
@@ -17731,11 +17731,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var slideCount = _react2.default.Children.count(props.children);
 	    var listWidth = _this2.getWidth(slickList);
 	    var trackWidth = _this2.getWidth(_reactDom2.default.findDOMNode(_this2.track));
-	    var slideWidth;
+	    var slideWidth, slidesWidth;
 
 	    if (!props.vertical) {
 	      if (props.variableWidth === true) {
 	        slideWidth = _this2.getWidth(slickList.querySelector('[data-index="0"]'));
+	        slidesWidth = 0;
+	        // get width from all children slides
+	        var children = slickList.querySelectorAll('[data-index]');
+	        children.forEach(function (slide) {
+	          slidesWidth += _this2.getWidth(slide);
+	        });
 	      } else {
 	        var centerPaddingAdj = props.centerMode && parseInt(props.centerPadding) * 2;
 	        slideWidth = (_this2.getWidth(_reactDom2.default.findDOMNode(_this2)) - centerPaddingAdj) / props.slidesToShow;
@@ -17759,19 +17765,28 @@ return /******/ (function(modules) { // webpackBootstrap
 	    _this2.setState({
 	      slideCount: slideCount,
 	      slideWidth: slideWidth,
+	      slidesWidth: slidesWidth,
 	      listWidth: listWidth,
 	      trackWidth: trackWidth,
 	      slideHeight: slideHeight,
 	      listHeight: listHeight,
 	      currentSlide: currentSlide
 	    }, function () {
+	      var _this3 = this;
+
+	      var slidesWidth = 0;
+	      // get width from all children slides
+	      var children = slickList.querySelectorAll('[data-index]');
+	      children.forEach(function (slide) {
+	        slidesWidth += _this3.getWidth(slide);
+	      });
 
 	      var targetLeft = (0, _trackHelper.getTrackLeft)((0, _objectAssign2.default)({
 	        slideIndex: this.state.currentSlide,
 	        trackRef: this.track
 	      }, props, this.state));
 	      // getCSS function needs previously set state
-	      var trackStyle = (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: targetLeft }, props, this.state));
+	      var trackStyle = (0, _trackHelper.getTrackCSS)((0, _objectAssign2.default)({ left: targetLeft }, props, this.state, { slidesWidth: slidesWidth }));
 
 	      this.setState({ trackStyle: trackStyle });
 	    });

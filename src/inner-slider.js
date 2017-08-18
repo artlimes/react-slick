@@ -265,7 +265,7 @@ export class InnerSlider extends React.Component {
 
     if (!props.vertical) {
       if (props.variableWidth === true) {
-        slideWidth = 0;
+        slideWidth = this.getWidth(slickList.querySelector('[data-index="0"]'));
         slidesWidth = 0;
         // get width from all children slides
         const children = slickList.querySelectorAll('[data-index]');
@@ -317,11 +317,17 @@ export class InnerSlider extends React.Component {
     var slideCount = React.Children.count(props.children);
     var listWidth = this.getWidth(slickList);
     var trackWidth = this.getWidth(ReactDOM.findDOMNode(this.track));
-    var slideWidth;
+    var slideWidth, slidesWidth;
 
     if (!props.vertical) {
       if (props.variableWidth === true) {
         slideWidth = this.getWidth(slickList.querySelector('[data-index="0"]'));
+        slidesWidth = 0;
+        // get width from all children slides
+        const children = slickList.querySelectorAll('[data-index]');
+        children.forEach((slide) => {
+          slidesWidth += this.getWidth(slide);
+        });
       } else {
         var centerPaddingAdj = props.centerMode && (parseInt(props.centerPadding) * 2);
         slideWidth = (this.getWidth(ReactDOM.findDOMNode(this)) - centerPaddingAdj)/props.slidesToShow;
@@ -346,6 +352,7 @@ export class InnerSlider extends React.Component {
     this.setState({
       slideCount,
       slideWidth,
+      slidesWidth,
       listWidth,
       trackWidth,
       slideHeight,
@@ -353,12 +360,19 @@ export class InnerSlider extends React.Component {
       currentSlide,
     }, function () {
 
+      let slidesWidth = 0;
+      // get width from all children slides
+      const children = slickList.querySelectorAll('[data-index]');
+      children.forEach((slide) => {
+        slidesWidth += this.getWidth(slide);
+      });
+
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
         trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state, {slidesWidth}));
 
       this.setState({trackStyle: trackStyle});
     });

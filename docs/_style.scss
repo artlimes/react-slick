@@ -92,3 +92,16 @@ h3 {
 .slick-vertical .slick-slide {
   height: 180px;
 }
+
+/*
+    Dynamic Center Mode
+ */
+.dynamic-center-mode {
+    max-width: 600px;
+    .slick-track {
+        margin: 0;
+    }
+    .slick-slide {
+        width: 100px;
+    }
+}
