@@ -282,27 +282,34 @@ export class InnerSlider extends React.Component {
 
     const slideHeight = props.slideHeight ? props.slideHeight * slideWidth
                                           : this.getHeight(slickList.querySelector('[data-index="0"]'));
-    const listHeight = slideHeight * props.slidesToShow;
 
-    var currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
+    const listHeight = slideHeight * props.slidesToShow;
+    const currentSlide = props.rtl ? slideCount - 1 - props.initialSlide : props.initialSlide;
 
     this.setState({
       slideCount,
       slideWidth,
       slidesWidth,
-      slideHeight,
       listWidth,
       trackWidth,
-      currentSlide,
+      slideHeight,
       listHeight,
+      currentSlide,
     }, function () {
+
+      let slidesWidth = 0;
+      // get width from all children slides
+      const children = slickList.querySelectorAll('[data-index]');
+      children.forEach((slide) => {
+        slidesWidth += this.getWidth(slide);
+      });
 
       var targetLeft = getTrackLeft(assign({
         slideIndex: this.state.currentSlide,
         trackRef: this.track
       }, props, this.state));
       // getCSS function needs previously set state
-      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state));
+      var trackStyle = getTrackCSS(assign({left: targetLeft}, props, this.state, {slidesWidth}));
 
       this.setState({trackStyle: trackStyle});
 
@@ -357,7 +364,7 @@ export class InnerSlider extends React.Component {
       trackWidth,
       slideHeight,
       listHeight,
-      currentSlide,
+      currentSlide
     }, function () {
 
       let slidesWidth = 0;
