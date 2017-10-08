@@ -1,6 +1,6 @@
 {
   "name": "react-slick-one",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React ES6 Babel2 port of React Slick 0.14.11",
   "main": "./lib",
   "scripts": {
